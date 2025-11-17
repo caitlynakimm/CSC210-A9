@@ -54,14 +54,64 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @param query The element to search
      *  @return the node of the given element, or null if not found
      */
-    public BST<E> lookup(E data){}
+    public BST<E> lookup(E data){
+        //stop condition: current node is null
+        if (this.getData() == null) {
+            return null;
+        }
+
+        //compare query with current node's data
+        int comparison = data.compareTo(this.getData());
+
+        //stop condition: found element
+        if (comparison == 0) {
+            return this;
+        } else if (comparison < 0) { //recursive step: search left subtree
+            if (this.getLeft() == null) {
+                return null; //element wasn't found
+            }
+
+            return ((BST<E>) this.getLeft()).lookup(data);
+        } else { //recursive step: search right subtree
+            if (this.getRight() == null) {
+                return null; //element wasn't found
+            }
+
+            return ((BST<E>) this.getRight()).lookup(data);
+        }
+        
+    }
 
     /**
      *  Inserts a new node into the tree
      *
      *  @param data The element to insert
      */
-    public void insert(E data);
+    public void insert(E data) {
+        //stop condition: node we want to insert is already present
+        if (this.getData() == null) {
+            insert(data);
+        }
+
+        //compare query with current node's data
+        int comparison = data.compareTo(this.getData());
+
+        if (comparison == 0) {
+
+        } else if (comparison < 0) {
+            if (this.getLeft() == null) {
+                insert(data);
+            } else {
+                ((BST<E>) this.getLeft()).insert(data);
+            }
+        } else {
+            if (this.getRight() == null) {
+                insert(data);
+            } else {
+                ((BST<E>) this.getRight()).insert(data);
+            }
+        }
+    }
 
     /**
      *  Deletes the specified element from the tree
@@ -71,7 +121,9 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @param evictee The element to delete
      *  @return tree as modified
      */
-    public BST<E> deleteWithCopyLeft(E evictee);
+    public BST<E> deleteWithCopyLeft(E evictee) {
+
+    }
 
     /**
      *  Apply left rotation
@@ -80,7 +132,9 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *
      *  @return tree as modified
      */
-    public BST<E> rotateLeft();
+    public BST<E> rotateLeft() {
+
+    }
 
     /**
      *  Apply right rotation
@@ -89,5 +143,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *
      *  @return tree as modified
      */
-    public BST<E> rotateRight();
+    public BST<E> rotateRight() {
+
+    }
 }

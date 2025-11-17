@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for array/BST/DLL conversion functions.
  *
- * @author YOUR_NAME_HERE
+ * @author Caitlyn Kim
  * @version Fall 2025
  */
 public class ConversionTests {
