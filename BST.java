@@ -88,27 +88,27 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @param data The element to insert
      */
     public void insert(E data) {
-        //stop condition: node we want to insert is already present
         if (this.getData() == null) {
-            insert(data);
+            throw new IllegalStateException("Can't insert into an empty root node.");
         }
 
-        //compare query with current node's data
+        //compares new element with current node's data
         int comparison = data.compareTo(this.getData());
 
+        //if duplicate found - tree doesn't change
         if (comparison == 0) {
-
-        } else if (comparison < 0) {
+            return;
+        } else if (comparison < 0) { //insert in left subtree
             if (this.getLeft() == null) {
-                insert(data);
+                this.setLeft(new BST<E>(data)); //create new node and set it as left child
             } else {
-                ((BST<E>) this.getLeft()).insert(data);
+                ((BST<E>) this.getLeft()).insert(data); //recurse into left subtree
             }
-        } else {
+        } else { //insert in right subtree
             if (this.getRight() == null) {
-                insert(data);
+                this.setRight(new BST<E>(data)); //create new node and set it as right child
             } else {
-                ((BST<E>) this.getRight()).insert(data);
+                ((BST<E>) this.getRight()).insert(data); //recurse into right subtree
             }
         }
     }
