@@ -122,7 +122,57 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @return tree as modified
      */
     public BST<E> deleteWithCopyLeft(E evictee) {
+        //compares element to delete with current node's data
+        int comparison = evictee.compareTo(this.getData());
 
+        if (comparison < 0) {
+            if (this.getLeft() != null) {
+                ((BST<E>) this.getLeft()).deleteWithCopyLeft(evictee);
+            }
+            return this;
+        } else if (comparison > 0) {
+            if (this.getRight() != null) {
+                ((BST<E>) this.getRight()).deleteWithCopyLeft(evictee);
+            }
+    
+            return this;
+        } else { //comparison == 0
+            return deleteNode(this); //found the node to delete and use copy-left deletion method
+        }
+    }
+
+    /**
+     * Method that performs the copy-left deletion
+     * @param evictee
+     * @return
+     */
+    private BST<E> deleteNode(BST<E> evictee) {
+        //if node is a leaf
+        if (evictee.getLeft() == null && evictee.getRight() == null) {
+            return null;
+        } else if (evictee.getRight() == null) { //if node only has left child
+            return ((BST<E>) evictee.getLeft());
+        } else if (evictee.getLeft() == null) { //if node only has right child
+            return ((BST<E>) evictee.getRight());
+        } else { //if node has left and right children, use copy-left method
+            BST<E> rightMost = findRightMost((BST<E>) evictee.getLeft()); //find rightmost node in left subtree
+            evictee.setData(rightMost.getData()); //copy rightMost node's data to current node
+            evictee.setLeft(((BST<E>) evictee.getLeft()).deleteWithCopyLeft(rightMost.getData())); //access left subtree and delete rightmost node
+
+            return evictee;
+        }
+    }
+
+    /**
+     * Finds rightmost node (biggest node) in a subtree
+     * @param node parent of subtree
+     */
+    private BST<E> findRightMost(BST<E> node) {
+        BST<E> current = node;
+        while (current.getRight() != null) {
+            current = (BST<E>) current.getRight();
+        }
+        return current;
     }
 
     /**
@@ -133,7 +183,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @return tree as modified
      */
     public BST<E> rotateLeft() {
-
+        
     }
 
     /**
