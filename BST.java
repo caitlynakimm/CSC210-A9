@@ -183,7 +183,24 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @return tree as modified
      */
     public BST<E> rotateLeft() {
-        
+        //check if rotation is possible (root must have right child)
+        if (this.getRight() == null) {
+            return this; //can't rotate, return current node
+        }
+
+        //references to nodes involved
+        BST<E> oldRoot = this;
+        BST<E> newRoot = (BST<E>) oldRoot.getRight();
+        BST<E> leftSubtreeOfNewRoot = (BST<E>) newRoot.getLeft();
+
+        //newRoot's left child becomes the oldRoot
+        newRoot.setLeft(oldRoot);
+
+        //oldRoot's right child becomes what was newRoot's left child
+        oldRoot.setRight(leftSubtreeOfNewRoot);
+
+        //return new root of rotated tree
+        return newRoot;
     }
 
     /**
@@ -194,6 +211,24 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
      *  @return tree as modified
      */
     public BST<E> rotateRight() {
+        //check if rotation is possible (root must have left child)
+        if (this.getLeft() == null) {
+            return this; //can't rotate, return current node
+        }
 
+        //references to nodes involved
+        BST<E> oldRoot = this;
+        BST<E> newRoot = (BST<E>) oldRoot.getLeft();
+        BST<E> rightSubtreeOfNewRoot = (BST<E>) newRoot.getRight();
+
+        //newRoot's right child becomes the oldRoot
+        newRoot.setRight(oldRoot);
+
+        //oldRoot's left child becomes what was newRoot's right child
+        oldRoot.setLeft(rightSubtreeOfNewRoot);
+
+        //return new root of rotated tree
+        return newRoot;
     }
+
 }
