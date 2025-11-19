@@ -10,7 +10,9 @@ Other Collaborators (and kudos to helpful members of the class):
 - n/a
 
 Any references used besides JavaDoc and course materials:
--
+- https://www.baeldung.com/java-find-parent-node-binary-search-tree
+- https://www.geeksforgeeks.org/dsa/insertion-in-binary-search-tree/
+- https://www.geeksforgeeks.org/dsa/sorted-array-to-balanced-bst/
 
 ## Assignment Reflection
 
