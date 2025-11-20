@@ -1,21 +1,26 @@
 /**
- * Implements binary search trees.
- *
+ * Implements binary search trees. Extends BinaryTree and implements BST operations.
+ * @param <E> type of elements stored in tree, needs to implement Comparable
  * @author Caitlyn Kim
  * @version Fall 2025
  */
 public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_Ops<E> {
     
-    /** This constructor creates a leaf node */
+    /**
+     * This constructor creates a leaf node
+     * @param data element to store in root node
+     * @return new BST instance with only root
+     */
     public BST(E data) {
         super(data);
     }
     
     /**
      * Creates branch node with left and right children
-     * @param data question for this node
+     * @param data element to store in root
      * @param left left child of node
      * @param right right child of node
+     * @return new BST instance with children
      */
     public BST(E data, BinaryTree<E> left, BinaryTree<E> right) {
         super(data);
@@ -23,14 +28,22 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
         this.setRight(right); //checks that right is type BST
     }
 
-    /** This constructor creates a deep copy of the entire tree structure */ 
+    /**
+     * This constructor creates a deep copy of the entire tree structure
+     * @param tree tree to copy
+     * @return new BST instance that's a copy of input tree
+     */
     public BST(BinaryTree<E> tree) {
         super(tree.getData());
         this.setLeft(tree.getLeft());
         this.setRight(tree.getRight());
     }
 
-    /** Override inherited manipulator to accept only BST */
+    /**
+     * Override inherited manipulator to accept only BST. Sets left child.
+     * @left left subtree to set
+     * @throws UnsupportedOperationException if left isn't a BST instance
+     */
     public void setLeft(BinaryTree<E> left) {
         if ((left==null)||(left instanceof BST<E>)) {
             super.setLeft(left);
@@ -39,7 +52,11 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
         }
     }
 
-    /** Override inherited manipulator to accept only BST */
+    /**
+     * Override inherited manipulator to accept only BST. Sets right child.
+     * @right right subtree to set
+     * @throws UnsupportedOperationException if right isn't BST instance
+     */
     public void setRight(BinaryTree<E> right) {
         if ((right==null)||(right instanceof BST<E>)) {
             super.setRight(right);
@@ -51,7 +68,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
     /**
      *  Returns the node of the given element, or null if not found
      *
-     *  @param query The element to search
+     *  @param data The element to search
      *  @return the node of the given element, or null if not found
      */
     public BST<E> lookup(E data){
@@ -60,7 +77,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
             return null;
         }
 
-        //compare query with current node's data
+        //compare element to search with current node's data
         int comparison = data.compareTo(this.getData());
 
         //stop condition: found element
@@ -84,8 +101,8 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
 
     /**
      *  Inserts a new node into the tree
-     *
      *  @param data The element to insert
+     * @throws IllegalStateException if attempt to insert into an empty root
      */
     public void insert(E data) {
         if (this.getData() == null) {
@@ -143,7 +160,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
     /**
      * Method that performs the copy-left deletion
      * @param evictee
-     * @return
+     * @return tree as modified
      */
     private BST<E> deleteNode(BST<E> evictee) {
         //if node is a leaf
@@ -163,8 +180,9 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
     }
 
     /**
-     * Finds rightmost node (biggest node) in a subtree
+     * Finds rightmost node/biggest node in a subtree
      * @param node parent of subtree
+     * @return rightmost node in a subtree
      */
     private BST<E> findRightMost(BST<E> node) {
         BST<E> current = node;

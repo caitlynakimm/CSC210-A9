@@ -1,11 +1,16 @@
 /**
- * Class to implement tree conversions
+ * Class to implement tree conversions. Allows for sorted arrays to convert to balanced BSTs and binary trees to doubly linked lists.
  *
  * @author Caitlyn Kim
  * @version Fall 2025
  */
 public class Conversion {
-  /** Converts a sorted array to a balanced BST */
+  /**
+   * Converts a sorted array to a balanced BST
+   * @param <T> type of elements stored in tree and array, must implement Comparable
+   * @param arr sorted array of elements to convert
+   * @return balanced BST<T> with all elements from the array or null if array is null or empty
+   */
   public static <T extends Comparable<T>> BST<T> arrayToBST(T[] arr) {
     if (arr == null || arr.length == 0) {
       return null;
@@ -13,6 +18,14 @@ public class Conversion {
     return arrayToBSTRecur(arr, 0, arr.length - 1);
   }
 
+  /**
+   * Recursive helper that builds balanced BST from a sorted array portion
+   * @param <T> type of elements stored in tree, must implement Comparable
+   * @param arr sorted array of elements
+   * @param lowIndex starting index of current segment
+   * @param highIndex ending index of current segment
+   * @return root BST<T> node of balanced subtree created
+   */
   public static <T extends Comparable<T>> BST<T> arrayToBSTRecur(T[] arr, int lowIndex, int highIndex) {
     //base case: current segment is empty
     if (lowIndex > highIndex) {
@@ -34,7 +47,12 @@ public class Conversion {
     return root;
   }
 
-  /** Convert BinaryTree to DLL */
+  /**
+   * Convert BinaryTree to DLL
+   * @param <S> type of elements stored in DLL and binary tree, must implement Comparable
+   * @param t root of binary tree to convert
+   * @return DLL<S> with all elements from binary tree in in-order sequence
+   */
   public static <S extends Comparable<S>> DLL<S> binaryTreeToDLL(BinaryTree<S> t) {
     if (t == null) {
       return new DLL<>();
@@ -45,6 +63,13 @@ public class Conversion {
     return new DLL<>(result[0], result[1]);
   }
 
+  /**
+   * Recursive helper to convert binary tree subtree to a DLL segment 
+   * and returns head and tail
+   * @param <S> type of elements stored in array of binary trees and binary trees
+   * @param t root of current binary tree subtree
+   * @return array of two BinaryTree<S> elements
+   */
   public static <S extends Comparable<S>> BinaryTree<S>[] convertToDLLRecur(BinaryTree<S> t) {
     if (t == null) {
       return null;
