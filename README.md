@@ -17,4 +17,4 @@ Any references used besides JavaDoc and course materials:
 ## Assignment Reflection
 
 Please reflect on your experience with this assignment. What was most challenging? What was most interesting?  What did you learn that you might use again?
-- 
+- The most challenging aspect part of this assignment was

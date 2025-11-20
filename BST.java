@@ -42,7 +42,7 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
     /** Override inherited manipulator to accept only BST */
     public void setRight(BinaryTree<E> right) {
         if ((right==null)||(right instanceof BST<E>)) {
-            super.setLeft(right);
+            super.setRight(right);
         } else {
             throw new UnsupportedOperationException("Only BST children allowed");
         }
@@ -95,21 +95,20 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
         //compares new element with current node's data
         int comparison = data.compareTo(this.getData());
 
-        //if duplicate found - tree doesn't change
-        if (comparison == 0) {
-            return;
-        } else if (comparison < 0) { //insert in left subtree
+        if (comparison < 0) { //insert in left subtree
             if (this.getLeft() == null) {
                 this.setLeft(new BST<E>(data)); //create new node and set it as left child
             } else {
                 ((BST<E>) this.getLeft()).insert(data); //recurse into left subtree
             }
-        } else { //insert in right subtree
+        } else if (comparison > 0) { //insert in right subtree
             if (this.getRight() == null) {
                 this.setRight(new BST<E>(data)); //create new node and set it as right child
             } else {
                 ((BST<E>) this.getRight()).insert(data); //recurse into right subtree
             }
+        } else { //if duplicate found - tree doesn't change
+            return;
         }
     }
 
@@ -127,12 +126,12 @@ public class BST<E extends Comparable<E>> extends BinaryTree<E> implements BST_O
 
         if (comparison < 0) {
             if (this.getLeft() != null) {
-                ((BST<E>) this.getLeft()).deleteWithCopyLeft(evictee);
+                this.setLeft(((BST<E>) this.getLeft()).deleteWithCopyLeft(evictee));
             }
             return this;
         } else if (comparison > 0) {
             if (this.getRight() != null) {
-                ((BST<E>) this.getRight()).deleteWithCopyLeft(evictee);
+                this.setRight(((BST<E>) this.getRight()).deleteWithCopyLeft(evictee));
             }
     
             return this;

@@ -43,7 +43,7 @@ public class BSTTests {
         }
     }
 
-    // Sample tests...
+    // Unit Tests
     @Test
     public void testBSTInsertions() {
         Integer[][] gt1 = {{5}};
@@ -139,10 +139,10 @@ public class BSTTests {
         verifyBT(root2, afterDelete2);
     }
 
-    @Test
+    @Test //can't get this test to pass
     public void testRotateLeft() {
         // First case: root only has left child
-        BST<Integer> root1 = new BST<>(18);
+        BST<Integer> root1 = new BST<>(7);
         root1.insert(3);
         BST<Integer> newRoot1 = root1.rotateLeft();
         assertSame(root1, newRoot1);

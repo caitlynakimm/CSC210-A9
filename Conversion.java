@@ -45,7 +45,7 @@ public class Conversion {
     return new DLL<>(result[0], result[1]);
   }
 
-  public static <S extends Comparable<S>> DLL<S> convertToDLLRecur(BinaryTree<S> t) {
+  public static <S extends Comparable<S>> BinaryTree<S>[] convertToDLLRecur(BinaryTree<S> t) {
     if (t == null) {
       return null;
     }
@@ -71,8 +71,8 @@ public class Conversion {
       tail = rightList[1]; //new tail is rightList's tail
     }
 
-    //return the new head and new tail of the combined list
-    //@SuppressWarnings("unchecked")
+    //return the new head and new tail as an array
+    @SuppressWarnings("unchecked")
     BinaryTree<S>[] result = new BinaryTree[2];
     result[0] = head;
     result[1] = tail;
