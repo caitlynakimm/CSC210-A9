@@ -38,7 +38,7 @@ public class ConversionTests {
         }
     }
 
-    //Unit Tests
+    //Unit Tests - tests conversion from a sorted array to a balanced BST and conversion from a BST to a DLL
     @Test
     public void testArrayToEmptyBST() {
         Integer[] empty = {};

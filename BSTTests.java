@@ -43,7 +43,7 @@ public class BSTTests {
         }
     }
 
-    // Unit Tests
+    // Unit Tests - tests BST operations lookup, insert, deleteWithCopyLeft, rotateLeft, and rotateRight
     @Test
     public void testBSTInsertions() {
         Integer[][] gt1 = {{5}};

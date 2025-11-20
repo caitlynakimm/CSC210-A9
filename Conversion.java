@@ -48,7 +48,7 @@ public class Conversion {
   }
 
   /**
-   * Convert BinaryTree to DLL
+   * Convert BST to DLL
    * @param <S> type of elements stored in DLL and binary tree, must implement Comparable
    * @param t root of binary tree to convert
    * @return DLL<S> with all elements from binary tree in in-order sequence
